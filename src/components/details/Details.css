@@ -1,0 +1,11 @@
+.details-panel {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.details-panel > li {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}

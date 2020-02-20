@@ -1,0 +1,15 @@
+.forecast-panel {
+  background: rgba(31, 34, 202, 0.719);
+  color: white;
+
+  display: flex;
+  justify-content: space-around;
+
+  padding: 20px 0;
+}
+
+.forecast-panel > li {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}

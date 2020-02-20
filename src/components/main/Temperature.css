@@ -1,0 +1,16 @@
+.temp-panel {
+  background: rgba(31, 34, 202, 0.719);
+  color: white;
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  
+  padding: 10px;
+}
+
+.temp {
+  margin: 10px 0;
+  font-size: 2em;
+  font-weight: 700;
+}
