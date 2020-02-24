@@ -1,0 +1,55 @@
+@import './reset.css';
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700&display=swap');
+@import './Themes.scss';
+
+.temp-panel,
+.forecast-panel {
+  background: var(--dark);
+}
+.conditions-panel {
+  background-color: var(--medium);
+}
+.details-panel {
+  background: var(--light);
+}
+
+body {
+  font-family: 'Lato', Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 10px;
+}
+
+form {
+  display: flex;
+  width: 480px;
+  margin: 0 auto 10px auto;
+}
+form input {
+  padding: 20px 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid grey;
+  flex-grow: 1;
+}
+form button {
+  margin-left: 10px;
+  flex-basis: 50px;
+}
+
+main {
+  width: 480px;
+  margin: 0 auto;
+
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.loading {
+  color: #888;
+  width: 480px;
+  margin: 0 auto;
+}

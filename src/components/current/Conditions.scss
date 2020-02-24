@@ -1,0 +1,95 @@
+@import './../../Themes.scss';
+
+.conditions-panel {
+  height: 360px;
+  position: relative;
+
+  overflow: hidden;
+}
+
+.conditions-gradient {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to top, var(--xlight), var(--gradient-dark));
+}
+
+.conditions-sun {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--xxlight);
+
+  box-shadow: 0 0 50px 10px var(--xxlight);
+
+  position: absolute;
+  bottom: 30%;
+  right: 25%;
+}
+
+.conditions-clouds {
+  margin-top: -20px;
+  width: 100%;
+  height: 80px;
+  background: var(--clouds);
+  
+  position: absolute;
+  top: 0;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 180px;
+
+    background: radial-gradient(ellipse at center, var(--clouds) 0%, var(--clouds) 60%, transparent 60%);
+    background-size: 200px 200px;
+    background-repeat: repeat-x;
+    background-position: 0 center;
+    
+    position: absolute;
+  }
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 180px;
+
+    background: radial-gradient(ellipse at center, var(--clouds) 0%, var(--clouds) 30%, transparent 30%);
+    background-size: 200px 200px;
+    background-repeat: repeat-x;
+    background-position: -248% 0;
+    
+    position: absolute;
+  }
+}
+
+.conditions-mountains {
+  width: 0;
+  height: 0;
+  border-width: 0 200px 100px 180px;
+  border-style: solid;
+  //border-color: transparent transparent rgb(4, 36, 54) transparent;
+  border-color: transparent transparent var(--dark) transparent;
+
+  position: absolute;
+  bottom: 0;
+  right: 50%;
+  transform: translate(25%, 0);
+
+  &::before,
+  &::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border-width: 0 180px 90px 160px;
+    border-style: solid;
+    border-color: transparent transparent var(--medium) transparent;
+  
+    position: absolute;
+    top: 10px;
+    left: 30px;
+  }
+
+  &::before {
+    transform: translate(-340px, 0);
+  }
+}

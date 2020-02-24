@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { Context } from './../../App';
 import moment from 'moment';
-import './Forecast.css';
+import './Forecast.scss';
 
 const Forecast = () => {
-  const { forecast } = useContext(Context);
+  const { forecast, celsiusFlag } = useContext(Context);
 
   const forecastDisplay = forecast.map((instance, idx) => {
     let relTime = moment.unix(instance.time).calendar(null, {
@@ -12,11 +12,17 @@ const Forecast = () => {
       nextDay: 'ddd',
       nextWeek: 'ddd',
     })
+    
     let tempC = Math.round(instance.temp - 273);
+    let tempF = Math.round((instance.temp - 273) * 1.8) + 32;
+
+    const tempElement = celsiusFlag ? <div className="forecast-temp">{tempC}°C</div> 
+                                    : <div className="forecast-temp">{tempF}°F</div>
+
     return (
       <li key={idx}>
-        <div>{tempC}°C</div>
-        <div>{instance.conditions}</div>
+        {tempElement}
+        <div className="forecast-conditions">{instance.conditions}</div>
         <img src={`http://openweathermap.org/img/wn/${instance.icon}.png`} alt={instance.conditions}/>
         <div>{relTime}</div>
       </li>

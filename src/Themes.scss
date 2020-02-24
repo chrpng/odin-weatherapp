@@ -1,0 +1,46 @@
+:root {
+  --dark: rgb(21, 79, 104);
+  --medium: rgb(7, 84, 104);
+  --light: rgb(36, 167, 160);
+  --xlight: rgb(75, 202, 224);
+  --xxlight: rgb(234, 250, 248);
+}
+
+// .day {
+//   --dark: rgb(51, 150, 196);
+//   --medium: rgb(58, 162, 211);
+//   --light: rgb(26, 138, 92);
+//   --xlight: rgb(121, 224, 255);
+//   --xxlight: rgb(255, 254, 225);
+//   --clouds: rgb(228, 245, 242);
+// }
+
+.day {
+  --dark: rgb(29, 137, 225);
+  --medium: rgb(124, 181, 225);
+  --light: rgb(245, 136, 97);
+  --gradient-dark: rgb(200, 235, 135);
+  --xlight: rgb(248, 239, 134);
+  --xxlight: rgb(255, 254, 225);
+  --clouds: rgb(232, 245, 228);
+}
+
+.evening {
+  --dark: rgb(129, 9, 83);
+  --medium: rgb(196, 48, 68);
+  --light: rgb(211, 108, 60);
+  --gradient-dark: rgb(196, 48, 68);
+  --xlight: rgb(245, 164, 89);
+  --xxlight: rgb(255, 232, 218);
+  --clouds: rgb(255, 232, 218);
+}
+
+.night {
+  --dark: rgb(7, 54, 75);
+  --medium: rgb(7, 84, 104);
+  --light: rgb(36, 167, 160);
+  --gradient-dark: rgb(7, 84, 104);
+  --xlight: rgb(75, 202, 224);
+  --xxlight: rgb(234, 250, 248);
+  --clouds: rgb(234, 250, 248);
+}

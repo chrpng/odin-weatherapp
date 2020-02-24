@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Context } from './../../App';
-import './Details.css';
+import './Details.scss';
 
 const Details = () => {
   const { details } = useContext(Context);
@@ -11,8 +11,8 @@ const Details = () => {
   return Object.entries(details).length !== 0 ? (
     <ul className="details-panel">
       <li>
-        <div>High/Low</div>
-        <div>{highC}°C/{lowC}°C</div>
+        <div>High / Low</div>
+        <div>{highC}° / {lowC}°</div>
       </li>
       <li>
         <div>Wind</div>

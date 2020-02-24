@@ -1,0 +1,70 @@
+@import './../../Themes.scss';
+
+.temp-panel {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  
+  padding: 30px;
+
+  position: relative;
+}
+
+.temp {
+  margin: 4px 0;
+
+  font-size: 3em;
+  font-weight: 700;
+}
+
+.temp-conditions,
+.temp-location {
+  margin: 4px 0;
+
+  font-size: 1.4em;
+  font-weight: 300;
+
+  position: relative;
+  z-index: 1;
+}
+
+.temp-conditions-icon {
+  margin-right: 40px;
+
+  position: absolute;
+  right: 0;
+
+  width: 100px;
+  height: 100px;
+}
+
+.temp-convert {
+  position: absolute;
+  right: 0;
+  padding-right: inherit;
+
+  button {
+    background: none;
+    color: white;
+    border: none;
+    outline: none;
+
+    &.active {
+      font-weight: 700;
+      text-shadow: 0 0 3px #fff;
+      font-size: 1.1em;
+    }
+
+    &:first-child {
+      border-right: 1px solid white;
+    }
+    &:last-child {
+      margin-left: -1px;
+      border-left: 1px solid white;
+    }
+
+    &:hover:not(.active) {
+      color: var(--xlight);
+    }
+  }
+}

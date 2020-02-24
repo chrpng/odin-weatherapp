@@ -1,8 +1,8 @@
 import React, { useState, useEffect, createContext } from 'react';
-import Temperature from './components/main/Temperature';
-import Conditions from './components/main/Conditions';
-import Details from './components/details/Details';
-import Forecast from './components/forecast/Forecast';
+import MainContainer from './components/mainContainer/MainContainer';
+import moment from 'moment';
+
+import './App.scss';
 
 export const Context = createContext();
 
@@ -11,18 +11,23 @@ function App() {
   const [ main, setMain ] = useState({});
   const [ details, setDetails ] = useState({});
   const [ forecast, setForecast ] = useState([]);
-
-  // Only for testing
-  useEffect(() => {
-    fetchWeather('London');
-    fetchForecast5('London');
-  }, [])
+  const [ time, setTime ] = useState('');
+  const [ celsiusFlag, setCelsiusFlag ] = useState(true);
+  const [ loadingFlag, setLoadingFlag ] = useState(false);
 
   const fetchWeather = async (city) => {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`, { mode: 'cors' });
-    if(response.ok) {
-      const json = await response.json();
-      setWeather(json);
+    try {
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`, { mode: 'cors' });
+      
+      //try catch?
+      if(response.ok) {
+        const json = await response.json();
+        setWeather(json);
+        console.log(json);
+        setTime(getLocalHour(json.dt, json.timezone));
+      }
+    } catch(err) {
+      console.log(err);
     }
   }
 
@@ -32,14 +37,18 @@ function App() {
       location: json.name,
       temp: json.main.temp,
       icon: json.weather[0].icon,
-    })
+    });
     setDetails({
       high: json.main.temp_max,
       low: json.main.temp_min,
       wind: json.wind.speed,
       humidity: json.main.humidity,
       visibility: json.visibility
-    })
+    });
+  }
+  
+  const getLocalHour = (unix, shift) => {
+    return moment.unix(unix + shift).utc().hours();
   }
 
   const fetchForecast5 = async (city) => {
@@ -67,29 +76,50 @@ function App() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchWeather(cityInput);
-    fetchForecast5(cityInput);
+    setLoadingFlag(true);
+
+    //await? Promise.all
+    //check why .then doesn't seesn't seem to wait
+    await Promise.all([
+      fetchWeather(cityInput),
+      fetchForecast5(cityInput),
+      // new Promise(resolve => {
+      //   setTimeout(() => {
+      //     console.log('waiting')
+      //     resolve()
+      //   }, 5000)
+      // })
+    ])
+
+    setLoadingFlag(false)
   }
 
   const handleChange = (e) => {
     setCityInput(e.target.value)
   }
 
+  // Only for testing
+  useEffect(() => {
+    fetchWeather('Seoul');
+    fetchForecast5('Seoul');
+  }, [])
+
+  const mainContainer = !loadingFlag ? (
+    <MainContainer time={time}></MainContainer>
+  ) : (
+    <div className="loading">loading...</div>
+  );
+
   return (
-    <Context.Provider value={{ main, details, forecast }}>
+    <Context.Provider value={{ main, details, forecast, celsiusFlag, setCelsiusFlag }}>
       <header>Weather App, by chrpng</header>
       <form onSubmit={handleSubmit}>
         <input type="text" onChange={handleChange}/>
         <button><i className="fas fa-search"></i></button>
       </form>
-      <main>
-        <Temperature></Temperature>
-        <Conditions></Conditions>
-        <Details></Details>
-        <Forecast></Forecast>
-      </main>
+      { mainContainer }
     </Context.Provider>
   );
 }

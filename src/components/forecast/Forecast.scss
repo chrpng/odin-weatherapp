@@ -1,7 +1,4 @@
 .forecast-panel {
-  background: rgba(31, 34, 202, 0.719);
-  color: white;
-
   display: flex;
   justify-content: space-around;
 
@@ -12,4 +9,11 @@
   display: flex;
   flex-flow: column;
   align-items: center;
+}
+.forecast-temp {
+  font-weight: bold;
+}
+
+.forecast-conditions {
+  padding-top: 12px;
 }
