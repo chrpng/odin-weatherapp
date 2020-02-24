@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/odin-weatherapp/static/css/main.d3576328.chunk.css",
+    "main.js": "/odin-weatherapp/static/js/main.984c06bf.chunk.js",
+    "main.js.map": "/odin-weatherapp/static/js/main.984c06bf.chunk.js.map",
+    "runtime-main.js": "/odin-weatherapp/static/js/runtime-main.bb9a4aea.js",
+    "runtime-main.js.map": "/odin-weatherapp/static/js/runtime-main.bb9a4aea.js.map",
+    "static/js/2.41b33ec3.chunk.js": "/odin-weatherapp/static/js/2.41b33ec3.chunk.js",
+    "static/js/2.41b33ec3.chunk.js.map": "/odin-weatherapp/static/js/2.41b33ec3.chunk.js.map",
+    "index.html": "/odin-weatherapp/index.html",
+    "precache-manifest.cd54c7c88343a8773acc8d2c6230ebfe.js": "/odin-weatherapp/precache-manifest.cd54c7c88343a8773acc8d2c6230ebfe.js",
+    "service-worker.js": "/odin-weatherapp/service-worker.js",
+    "static/css/main.d3576328.chunk.css.map": "/odin-weatherapp/static/css/main.d3576328.chunk.css.map",
+    "static/js/2.41b33ec3.chunk.js.LICENSE.txt": "/odin-weatherapp/static/js/2.41b33ec3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.bb9a4aea.js",
+    "static/js/2.41b33ec3.chunk.js",
+    "static/css/main.d3576328.chunk.css",
+    "static/js/main.984c06bf.chunk.js"
+  ]
+}
