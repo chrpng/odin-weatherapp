@@ -14,20 +14,26 @@ function App() {
   const [ time, setTime ] = useState('');
   const [ celsiusFlag, setCelsiusFlag ] = useState(true);
   const [ loadingFlag, setLoadingFlag ] = useState(false);
+  const [ error404Flag, setError404Flag ] = useState(false);
 
   const fetchWeather = async (city) => {
-    try {
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`, { mode: 'cors' });
-      
-      //try catch?
-      if(response.ok) {
-        const json = await response.json();
-        setWeather(json);
-        console.log(json);
-        setTime(getLocalHour(json.dt, json.timezone));
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`, { mode: 'cors' });
+
+    if(response.ok) {
+      const json = await response.json();
+      setWeather(json);
+      setTime(getLocalHour(json.dt, json.timezone));
+    } else if(response.status) {
+      switch(response.status) {
+        case 404:
+          let e = new Error(response.statusText);
+          e.name = 'HTTP Error';
+          throw e;
+        default:
+          throw new Error(response.statusText);
       }
-    } catch(err) {
-      console.log(err);
+    } else {
+      throw new Error(response);
     }
   }
 
@@ -53,9 +59,16 @@ function App() {
 
   const fetchForecast5 = async (city) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${process.env.REACT_APP_OPENWEATHERMAP_API_KEY}`, { mode: 'cors' });
+    
     if(response.ok) {
       const json = await response.json();
       setForecast5(json);
+    } else if(response.status === 404) {
+      let e = new Error(response.statusText);
+      e.name = 'HTTP Error';
+      throw e;
+    } else {
+      throw new Error(response);
     }
   }
 
@@ -82,18 +95,23 @@ function App() {
 
     //await? Promise.all
     //check why .then doesn't seesn't seem to wait
-    await Promise.all([
-      fetchWeather(cityInput),
-      fetchForecast5(cityInput),
-      // new Promise(resolve => {
-      //   setTimeout(() => {
-      //     console.log('waiting')
-      //     resolve()
-      //   }, 5000)
-      // })
-    ])
-
-    setLoadingFlag(false)
+    try {
+      await Promise.all([
+        fetchWeather(cityInput),
+        fetchForecast5(cityInput),
+        // new Promise(resolve => {
+        //   setTimeout(() => {
+        //     console.log('waiting')
+        //     resolve()
+        //   }, 5000)
+        // })
+      ])
+      setError404Flag(false);
+    } catch(err) {
+      if(err.name === 'HTTP Error') setError404Flag(true);
+      console.log(err)
+    }
+    setLoadingFlag(false);
   }
 
   const handleChange = (e) => {
@@ -101,15 +119,15 @@ function App() {
   }
 
   // Only for testing
-  useEffect(() => {
-    fetchWeather('Seoul');
-    fetchForecast5('Seoul');
-  }, [])
+  // useEffect(() => {
+  //   fetchWeather('Seoul');
+  //   fetchForecast5('Seoul');
+  // }, [])
 
-  const mainContainer = !loadingFlag ? (
-    <MainContainer time={time}></MainContainer>
+  const mainContainer = !error404Flag ? (
+    <MainContainer time={time} loadingFlag={loadingFlag}></MainContainer>
   ) : (
-    <div className="loading">loading...</div>
+    <div className="loading">Invalid entry</div>
   );
 
   return (
