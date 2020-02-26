@@ -23,7 +23,7 @@ const Forecast = () => {
       <li key={idx}>
         {tempElement}
         <div className="forecast-conditions">{instance.conditions}</div>
-        <img src={`http://openweathermap.org/img/wn/${instance.icon}.png`} alt={instance.conditions}/>
+        <img src={`https://openweathermap.org/img/wn/${instance.icon}.png`} alt={instance.conditions}/>
         <div>{relTime}</div>
       </li>
     )

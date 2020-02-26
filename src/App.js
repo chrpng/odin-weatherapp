@@ -109,7 +109,7 @@ function App() {
       setError404Flag(false);
     } catch(err) {
       if(err.name === 'HTTP Error') setError404Flag(true);
-      console.log(err)
+      console.error(err)
     }
     setLoadingFlag(false);
   }
@@ -119,10 +119,10 @@ function App() {
   }
 
   // Only for testing
-  // useEffect(() => {
-  //   fetchWeather('Seoul');
-  //   fetchForecast5('Seoul');
-  // }, [])
+  useEffect(() => {
+    fetchWeather('Denver');
+    fetchForecast5('Denver');
+  }, [])
 
   const mainContainer = !error404Flag ? (
     <MainContainer time={time} loadingFlag={loadingFlag}></MainContainer>
