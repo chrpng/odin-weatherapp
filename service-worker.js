@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/odin-weatherapp/precache-manifest.cd54c7c88343a8773acc8d2c6230ebfe.js"
+  "/odin-weatherapp/precache-manifest.cb8af86916dc22cc340bfc3a223a5684.js"
 );
 
 self.addEventListener('message', (event) => {
